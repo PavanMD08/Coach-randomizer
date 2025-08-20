@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Randomizer</title>
+</head>
+<body>
+  <h1>Random Coach</h1>
+  <img id="coachImage" src="https://i.postimg.cc/y8fFK7X0/Aishwarya.jpg" width="300">
+  <script>
+    const coaches = [
+      "https://i.postimg.cc/y8fFK7X0/Aishwarya.jpg",
+      "https://i.postimg.cc/abc123/AnotherCoach.jpg"
+    ];
+    const random = Math.floor(Math.random() * coaches.length);
+    document.getElementById("coachImage").src = coaches[random];
+  </script>
+</body>
+</html>
