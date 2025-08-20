@@ -7,115 +7,212 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3MLMR0534"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-B3MLMR0534');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B3MLMR0534');
 </script>
 <style>
-body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 /* Header */
-.header { display: flex; align-items: center; padding: 10px 20px; background: #fff; border-bottom: 1px solid #ddd; }
-.header img { height: 57px; margin-right: auto; }
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.header img {
+    height: 57px;
+    margin-right: auto;
+}
 /* Title */
-.title-section { text-align: center; margin: 30px 0 20px 0; }
-.title-section h1 { font-family: "PT Sans", sans-serif; font-weight: bold; color: #0f3d44; font-size: 37px; margin-bottom: 10px; }
-.title-section p { font-family: Arial, sans-serif; font-size: 12px; color: #0f3d44; }
+.title-section {
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
+.title-section h1 {
+    font-family: "PT Sans", sans-serif;
+    font-weight: bold;
+    color: #0f3d44;
+    font-size: 37px;
+    margin-bottom: 10px;
+}
+.title-section p {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #0f3d44;
+}
 /* Search bar */
-.search-container { display: flex; justify-content: center; margin-bottom: 20px; }
-.search-container input { width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 20px; text-align: center; }
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.search-container input {
+    width: 40%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+}
 /* Coach grid */
-.coach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; flex-grow: 1; }
-.coach-card { background: #fff; border-radius: 12px; border: 1px solid #0f3d44; text-align: center; padding: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; }
-.coach-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-.coach-card img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 10px; }
-.coach-card h3 { margin: 5px 0; color: #0f3d44; }
-.coach-card p { margin: 0; color: #007BFF; font-weight: bold; }
+.coach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    flex-grow: 1;
+}
+.coach-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #0f3d44;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.coach-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.coach-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.coach-card h3 {
+    margin: 5px 0;
+    color: #0f3d44;
+}
+.coach-card p {
+    margin: 0;
+    color: #007BFF;
+    font-weight: bold;
+}
 /* Responsive */
 @media (max-width: 768px) {
-  .coach-grid { grid-template-columns: repeat(2, 1fr); }
-  .coach-card img { width: 100px; height: 100px; }
-  .search-container input { width: 70%; }
+    .coach-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .coach-card img {
+        width: 100px;
+        height: 100px;
+    }
+    .search-container input {
+        width: 70%;
+    }
 }
 /* Footer */
-footer { background: #fff; border-top: 1px solid #ddd; text-align: center; padding: 15px; font-size: 14px; }
-footer a { margin: 0 10px; text-decoration: none; color: #0f3d44; }
+footer {
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+footer a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0f3d44;
+}
 /* Floating WhatsApp icon */
-.whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 50px; height: 50px; cursor: pointer; }
-.whatsapp-float img { width: 100%; height: 100%; }
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.whatsapp-float img {
+    width: 100%;
+    height: 100%;
+}
 </style>
 </head>
 <body>
 <!-- Header -->
 <div class="header">
-  <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
 </div>
 <!-- Title -->
 <div class="title-section">
-  <h1>Choose your coach</h1>
-  <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
+    <h1>Choose your coach</h1>
+    <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
 </div>
 <!-- Search -->
 <div class="search-container">
-  <input type="text" id="search" placeholder="Search">
+    <input type="text" id="search" placeholder="Search">
 </div>
 <!-- Coach Grid -->
 <div class="coach-grid" id="coachGrid"></div>
 <!-- Footer -->
 <footer>
-  <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> | 
-  <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> | 
-  <a href="mailto:support@livezy.com">support@livezy.com</a>
+    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
+    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
+    <a href="mailto:support@livezy.com">support@livezy.com</a>
 </footer>
 <!-- Floating WhatsApp -->
 <a href="https://wa.me/919663488580" target="_blank" class="whatsapp-float">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
 </a>
-
 <script>
 async function fetchCoaches() {
-  const response = await fetch('coaches.json');
-  const coaches = await response.json();
+    const response = await fetch('coaches.json');
+    const coaches = await response.json();
 
-  // Shuffle array for random order
-  const shuffled = coaches.sort(() => Math.random() - 0.5);
-  const grid = document.getElementById('coachGrid');
-  grid.innerHTML = "";
+    // Shuffle array for random order
+    const shuffled = coaches.sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('coachGrid');
+    grid.innerHTML = "";
 
-  shuffled.forEach(coach => {
-    const card = document.createElement('a');
-    card.href = coach.link;
-    card.className = 'coach-card';
-    card.innerHTML = `
-      <img src="${coach.image}" alt="${coach.name}">
-      <h3>${coach.name}</h3>
-      <p>View Profile</p>
-    `;
-
-    // GA click tracking
-    card.addEventListener('click', () => {
-      if (typeof gtag === 'function') {
-        gtag('event', 'click_coach_card', {
-          'coach_name': coach.name
+    shuffled.forEach(coach => {
+        const card = document.createElement('a');
+        card.href = coach.link;
+        card.className = 'coach-card';
+        card.target = "_self";
+        card.innerHTML = `
+            <img src="${coach.image}" alt="${coach.name}">
+            <h3>${coach.name}</h3>
+            <p>View Profile</p>
+        `;
+        // Track click in GA4
+        card.addEventListener('click', () => {
+            gtag('event', 'coach_click', {
+                'coach_name': coach.name,
+                'coach_link': coach.link
+            });
         });
-      }
+        grid.appendChild(card);
     });
-
-    grid.appendChild(card);
-  });
 }
 
 // Search filter
 document.getElementById('search').addEventListener('input', function(e) {
-  const search = e.target.value.toLowerCase();
-  const cards = document.querySelectorAll('.coach-card');
-  cards.forEach(card => {
-    const name = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = name.includes(search) ? "block" : "none";
-  });
+    const search = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.coach-card');
+    cards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = name.includes(search) ? "block" : "none";
+    });
 });
 
-// Load coaches on page load
 fetchCoaches();
 </script>
 </body>
