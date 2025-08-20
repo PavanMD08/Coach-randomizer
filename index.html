@@ -3,194 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose Your Coach</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* Header */
-    .header {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-    }
-    .header img {
-      height: 50px; /* slightly bigger logo */
-      margin-right: auto;
-    }
-
-    /* Title */
-    .title-section {
-      text-align: center;
-      margin: 30px 0 20px 0; /* pushed a bit lower */
-    }
-    .title-section h1 {
-      font-family: "PT Sans", sans-serif;
-      font-weight: bold;
-      color: #0f3d44;
-      font-size: 37px; /* ~10% larger */
-      margin-bottom: 10px;
-    }
-    .title-section p {
-      font-family: Arial, sans-serif;
-      font-size: 12px; /* slightly bigger */
-      color: #0f3d44;
-    }
-
-    /* Search bar */
-    .search-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .search-container input {
-      width: 40%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      text-align: center;
-    }
-
-    /* Coach grid */
-    .coach-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 cards per row on desktop */
-      gap: 20px; /* space between cards */
-      padding: 20px;
-      flex-grow: 1;
-    }
-    .coach-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      padding: 15px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .coach-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .coach-card img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-    .coach-card h3 {
-      margin: 5px 0;
-      color: #0f3d44;
-    }
-    .coach-card p {
-      margin: 0;
-      color: #007BFF;
-      font-weight: bold;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .coach-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 per row on mobile */
-      }
-      .coach-card img {
-        width: 100px;
-        height: 100px;
-      }
-    }
-
-    /* Footer */
-    footer {
-      background: #fff;
-      border-top: 1px solid #ddd;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-    }
-    footer a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0f3d44;
-    }
-  </style>
+  <title>LivEzy Coaches</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
 
   <!-- Header -->
-  <div class="header">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
-  </div>
+  <header class="flex items-center justify-center py-6">
+    <img src="logo.png" alt="LivEzy Logo" class="h-16 md:h-20"> <!-- 15% bigger logo -->
+  </header>
 
-  <!-- Title -->
-  <div class="title-section">
-    <h1>Choose your coach</h1>
-    <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
-  </div>
+  <!-- Title & Subtitle -->
+  <section class="text-center px-4">
+    <h1 class="text-3xl md:text-5xl font-bold mb-2">Meet Our Coaches</h1> <!-- 10% bigger -->
+    <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+      Your journey to fitness starts here – guided by the best.
+    </p>
+  </section>
 
-  <!-- Search -->
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Search">
-  </div>
-
-  <!-- Coach Grid -->
-  <div class="coach-grid" id="coachGrid"></div>
+  <!-- Coloured Layer Section -->
+  <section class="flex-grow w-full mt-6 bg-[#0f3d44] py-10 px-4">
+    <div id="coaches" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto"></div>
+  </section>
 
   <!-- Footer -->
-  <footer>
-    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
-    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
-    <a href="mailto:support@livezy.com">support@livezy.com</a> |
-    <a href="https://wa.me/919663488580" target="_blank">WhatsApp: +91 96634 88580</a>
+  <footer class="bg-[#0f3d44] text-white text-center py-6 px-4 mt-auto">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+      <a href="#" class="hover:underline">T&amp;C's</a>
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <a href="#" class="hover:underline">Contact Us</a>
+    </div>
   </footer>
 
+  <!-- Script to fetch coaches -->
   <script>
-    async function fetchCoaches() {
-      const response = await fetch('coaches.json');
-      const coaches = await response.json();
+    async function loadCoaches() {
+      try {
+        const response = await fetch('coaches.json');
+        const coaches = await response.json();
 
-      // Shuffle array for random order
-      const shuffled = coaches.sort(() => Math.random() - 0.5);
+        // Randomize coach order
+        const shuffled = coaches.sort(() => 0.5 - Math.random());
 
-      const grid = document.getElementById('coachGrid');
-      grid.innerHTML = "";
+        const container = document.getElementById('coaches');
+        container.innerHTML = '';
 
-      shuffled.forEach(coach => {
-        const card = document.createElement('a');
-        card.href = coach.link;
-        card.target = "_blank";
-        card.className = 'coach-card';
-        card.innerHTML = `
-          <img src="${coach.image}" alt="${coach.name}">
-          <h3>${coach.name}</h3>
-          <p>View Profile</p>
-        `;
-        grid.appendChild(card);
-      });
+        shuffled.forEach(coach => {
+          const card = document.createElement('a');
+          card.href = coach.profile || '#';
+          card.className = "block bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-lg";
+
+          card.innerHTML = `
+            <div class="flex flex-col items-center p-4">
+              <img src="${coach.image}" alt="${coach.name}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full mb-3">
+              <h2 class="text-lg font-semibold text-gray-800">${coach.name}</h2>
+              <p class="text-sm text-blue-600 font-medium mt-1">View Profile</p>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error('Error loading coaches:', error);
+      }
     }
 
-    document.getElementById('search').addEventListener('input', function(e) {
-      const search = e.target.value.toLowerCase();
-      const cards = document.querySelectorAll('.coach-card');
-      cards.forEach(card => {
-        const name = card.querySelector('h3').textContent.toLowerCase();
-        card.style.display = name.includes(search) ? "block" : "none";
-      });
-    });
-
-    fetchCoaches();
+    loadCoaches();
   </script>
+
 </body>
 </html>
