@@ -1,20 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coach Randomizer</title>
+  <title>Coach Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #search-box {
+      padding: 10px;
+      width: 250px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .coach-card {
+      margin: 20px auto;
+      max-width: 300px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .coach-card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .coach-card h2 {
+      margin: 10px 0;
+    }
+    .coach-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
-  <h1>Random Coach</h1>
-  <img id="coachImage" src="https://i.postimg.cc/y8fFK7X0/Aishwarya.jpg" width="300">
+
+  <h1>Find Your Coach</h1>
+  <input type="text" id="search-box" placeholder="Search for a coach...">
+  <div id="coach-container"></div>
+
   <script>
-    const coaches = [
-      "https://i.postimg.cc/y8fFK7X0/Aishwarya.jpg",
-      "https://i.postimg.cc/abc123/AnotherCoach.jpg"
-    ];
-    const random = Math.floor(Math.random() * coaches.length);
-    document.getElementById("coachImage").src = coaches[random];
+    let coaches = [];
+
+    async function loadCoaches() {
+      try {
+        const response = await fetch("coaches.json");
+        coaches = await response.json();
+        showRandomCoach(); // initial random coach
+      } catch (error) {
+        document.getElementById("coach-container").innerText = "Failed to load coaches.";
+        console.error(error);
+      }
+    }
+
+    function showRandomCoach() {
+      const randomCoach = coaches[Math.floor(Math.random() * coaches.length)];
+      renderCoach(randomCoach);
+    }
+
+    function renderCoach(coach) {
+      if (!coach) {
+        document.getElementById("coach-container").innerHTML = `<p>No coach found</p>`;
+        return;
+      }
+      document.getElementById("coach-container").innerHTML = `
+        <div class="coach-card">
+          <a href="${coach.link}" target="_blank">
+            <img src="${coach.image}" alt="${coach.name}">
+            <h2>${coach.name}</h2>
+          </a>
+        </div>
+      `;
+    }
+
+    document.getElementById("search-box").addEventListener("input", function() {
+      const query = this.value.toLowerCase();
+      const match = coaches.find(c => c.name.toLowerCase().includes(query));
+      renderCoach(match);
+    });
+
+    loadCoaches();
   </script>
+
 </body>
 </html>
