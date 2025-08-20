@@ -63,8 +63,8 @@
     /* Coach grid */
     .coach-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px; /* spacing between cards */
+      grid-template-columns: repeat(4, 1fr); /* 4 cards per row on desktop */
+      gap: 20px; /* space between cards */
       padding: 20px;
       flex-grow: 1;
     }
@@ -97,18 +97,18 @@
     }
     .coach-card p {
       margin: 0;
-      color: #555;
-      font-size: 14px;
+      color: #007BFF;
+      font-weight: bold;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
+      .coach-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on mobile */
+      }
       .coach-card img {
         width: 100px;
         height: 100px;
-      }
-      .coach-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile */
       }
     }
 
@@ -131,7 +131,7 @@
 
   <!-- Header -->
   <div class="header">
-    <img src="https://i.postimg.cc/P5ZzpvqY/Logo-2.png" alt="Logo">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
   </div>
 
   <!-- Title -->
@@ -175,7 +175,7 @@
         card.innerHTML = `
           <img src="${coach.image}" alt="${coach.name}">
           <h3>${coach.name}</h3>
-          <p>${coach.specialty}</p>
+          <p>View Profile</p>
         `;
         grid.appendChild(card);
       });
