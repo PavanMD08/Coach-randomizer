@@ -3,209 +3,194 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose Your Coach - LivEzy</title>
+  <title>Choose Your Coach</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
+      background-color: #f8f9fa;
       margin: 0;
       padding: 0;
-      text-align: center;
-      color: #0f3d44;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* Header */
-    header {
+    .header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .header img {
+      height: 50px; /* slightly bigger logo */
+      margin-right: auto;
     }
 
-    header img {
-      position: absolute;
-      left: 20px;
-      height: 40px;
+    /* Title */
+    .title-section {
+      text-align: center;
+      margin: 30px 0 20px 0; /* pushed a bit lower */
     }
-
-    header h1 {
-      font-family: 'PT Sans', sans-serif;
+    .title-section h1 {
+      font-family: "PT Sans", sans-serif;
       font-weight: bold;
-      font-size: 34px;
-      margin: 0;
+      color: #0f3d44;
+      font-size: 37px; /* ~10% larger */
+      margin-bottom: 10px;
+    }
+    .title-section p {
+      font-family: Arial, sans-serif;
+      font-size: 12px; /* slightly bigger */
       color: #0f3d44;
     }
 
-    header p {
-      font-size: 11px;
-      margin: 5px 0 0;
-      color: #0f3d44;
+    /* Search bar */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
     }
-
-    /* Search */
-    #searchBar {
-      width: 50%;
-      max-width: 300px;
-      padding: 8px;
-      margin: 20px auto;
+    .search-container input {
+      width: 40%;
+      padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      display: block;
+      border-radius: 20px;
+      text-align: center;
     }
 
-    /* Coaches grid */
-    .coach-container {
+    /* Coach grid */
+    .coach-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px; /* spacing between cards */
       padding: 20px;
-      max-width: 1200px;
-      margin: auto;
+      flex-grow: 1;
     }
-
     .coach-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 15px;
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      display: block;
     }
-
     .coach-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
     .coach-card img {
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 50%;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
-
     .coach-card h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
+      margin: 5px 0;
       color: #0f3d44;
     }
-
     .coach-card p {
-      font-size: 14px;
+      margin: 0;
       color: #555;
-      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .coach-card img {
+        width: 100px;
+        height: 100px;
+      }
+      .coach-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile */
+      }
     }
 
     /* Footer */
     footer {
-      background: #0f3d44;
-      color: white;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      text-align: center;
       padding: 15px;
-      margin-top: 30px;
+      font-size: 14px;
     }
-
     footer a {
-      color: white;
-      text-decoration: none;
       margin: 0 10px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+      text-decoration: none;
+      color: #0f3d44;
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header>
+  <div class="header">
     <img src="https://i.postimg.cc/P5ZzpvqY/Logo-2.png" alt="Logo">
-    <div>
-      <h1>Choose your coach</h1>
-      <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
-    </div>
-  </header>
+  </div>
 
-  <!-- Search Bar -->
-  <input type="text" id="searchBar" placeholder="Search" onkeyup="searchCoaches()">
+  <!-- Title -->
+  <div class="title-section">
+    <h1>Choose your coach</h1>
+    <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
+  </div>
 
-  <!-- Coach Cards -->
-  <div class="coach-container" id="coachContainer"></div>
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search">
+  </div>
+
+  <!-- Coach Grid -->
+  <div class="coach-grid" id="coachGrid"></div>
 
   <!-- Footer -->
   <footer>
-    <a href="https://livezy.com/terms-conditions" target="_blank">T&C's</a> | 
-    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> | 
-    <a href="mailto:support@livezy.com">support@livezy.com</a> | 
-    <a href="https://wa.me/919663488580" target="_blank">WhatsApp</a>
+    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
+    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
+    <a href="mailto:support@livezy.com">support@livezy.com</a> |
+    <a href="https://wa.me/919663488580" target="_blank">WhatsApp: +91 96634 88580</a>
   </footer>
 
   <script>
-    const coaches = [
-      {
-        "name": "Coach A",
-        "expertise": "Strength Training",
-        "image": "https://via.placeholder.com/200",
-        "link": "https://example.com"
-      },
-      {
-        "name": "Coach B",
-        "expertise": "Yoga",
-        "image": "https://via.placeholder.com/200",
-        "link": "https://example.com"
-      },
-      {
-        "name": "Coach C",
-        "expertise": "Nutrition",
-        "image": "https://via.placeholder.com/200",
-        "link": "https://example.com"
-      },
-      {
-        "name": "Coach D",
-        "expertise": "Cardio",
-        "image": "https://via.placeholder.com/200",
-        "link": "https://example.com"
-      }
-    ];
+    async function fetchCoaches() {
+      const response = await fetch('coaches.json');
+      const coaches = await response.json();
 
-    const container = document.getElementById("coachContainer");
+      // Shuffle array for random order
+      const shuffled = coaches.sort(() => Math.random() - 0.5);
 
-    function displayCoaches(list) {
-      container.innerHTML = "";
-      list.forEach(coach => {
-        const card = document.createElement("a");
-        card.className = "coach-card";
+      const grid = document.getElementById('coachGrid');
+      grid.innerHTML = "";
+
+      shuffled.forEach(coach => {
+        const card = document.createElement('a');
         card.href = coach.link;
         card.target = "_blank";
+        card.className = 'coach-card';
         card.innerHTML = `
           <img src="${coach.image}" alt="${coach.name}">
           <h3>${coach.name}</h3>
-          <p>${coach.expertise}</p>
+          <p>${coach.specialty}</p>
         `;
-        container.appendChild(card);
+        grid.appendChild(card);
       });
     }
 
-    function searchCoaches() {
-      const query = document.getElementById("searchBar").value.toLowerCase();
-      const filtered = coaches.filter(coach => 
-        coach.name.toLowerCase().includes(query) || 
-        coach.expertise.toLowerCase().includes(query)
-      );
-      displayCoaches(filtered);
-    }
+    document.getElementById('search').addEventListener('input', function(e) {
+      const search = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.coach-card');
+      cards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = name.includes(search) ? "block" : "none";
+      });
+    });
 
-    displayCoaches(coaches);
+    fetchCoaches();
   </script>
-
 </body>
 </html>
