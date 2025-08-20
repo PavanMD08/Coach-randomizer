@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coaches</title>
+  <title>Coach Directory</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,97 +11,97 @@
       text-align: center;
     }
 
-    .search-container {
+    /* Search bar */
+    #searchBar {
+      width: 50%;
+      padding: 10px;
       margin-bottom: 20px;
-    }
-
-    #search {
-      width: 40%;
-      max-width: 400px;
-      padding: 8px;
       font-size: 16px;
     }
 
-    .grid {
+    /* Grid layout */
+    .coach-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       justify-items: center;
     }
 
-    .card {
+    .coach-card {
       border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 10px;
+      padding: 15px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      background: white;
-      width: 100%;
-      max-width: 250px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      background: #fff;
     }
 
-    .card img {
+    .coach-card:hover {
+      transform: scale(1.05);
+    }
+
+    .coach-card img {
       width: 200px;
       height: 200px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 50%;
+      margin-bottom: 10px;
     }
 
-    .card h3 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-
-    .card a {
+    .coach-card a {
       text-decoration: none;
-      color: #0073e6;
+      color: #007BFF;
       font-weight: bold;
     }
-
   </style>
 </head>
 <body>
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Search coaches...">
-  </div>
 
-  <div class="grid" id="coach-list"></div>
+  <!-- Search bar -->
+  <input type="text" id="searchBar" placeholder="Search coaches...">
+
+  <!-- Coach list -->
+  <div class="coach-list" id="coachList"></div>
 
   <script>
-    async function fetchCoaches() {
-      const response = await fetch("https://pavanmurthy.github.io/coach-data/coaches.json"); // replace with your JSON URL
+    async function loadCoaches() {
+      const response = await fetch('coaches.json');
       let coaches = await response.json();
 
       // Randomize order
       coaches = coaches.sort(() => Math.random() - 0.5);
 
-      const list = document.getElementById("coach-list");
-      const search = document.getElementById("search");
+      const coachList = document.getElementById('coachList');
 
-      function display(filteredCoaches) {
-        list.innerHTML = "";
+      function displayCoaches(filteredCoaches) {
+        coachList.innerHTML = '';
         filteredCoaches.forEach(coach => {
-          const card = document.createElement("div");
-          card.className = "card";
+          const card = document.createElement('div');
+          card.className = 'coach-card';
           card.innerHTML = `
             <img src="${coach.image}" alt="${coach.name}">
             <h3>${coach.name}</h3>
             <a href="${coach.link}" target="_blank">View Profile</a>
           `;
-          list.appendChild(card);
+          coachList.appendChild(card);
         });
       }
 
-      display(coaches);
+      // Initial display
+      displayCoaches(coaches);
 
-      search.addEventListener("input", e => {
-        const value = e.target.value.toLowerCase();
-        const filtered = coaches.filter(c => c.name.toLowerCase().includes(value));
-        display(filtered);
+      // Search filter
+      document.getElementById('searchBar').addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase();
+        const filtered = coaches.filter(coach =>
+          coach.name.toLowerCase().includes(searchValue)
+        );
+        displayCoaches(filtered);
       });
     }
 
-    fetchCoaches();
+    loadCoaches();
   </script>
 </body>
 </html>
