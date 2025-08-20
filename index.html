@@ -24,7 +24,7 @@
       border-bottom: 1px solid #ddd;
     }
     .header img {
-      height: 57px; /* slightly bigger logo (~15% larger) */
+      height: 57px; /* slightly bigger logo */
       margin-right: auto;
     }
 
@@ -32,20 +32,18 @@
     .title-section {
       text-align: center;
       margin: 30px 0 20px 0;
-      background-color: #0f3d44; /* layer under title till footer */
-      padding: 30px 10px 50px 10px;
     }
     .title-section h1 {
       font-family: "PT Sans", sans-serif;
       font-weight: bold;
-      color: #fff;
-      font-size: 37px; /* ~10% larger */
+      color: #0f3d44;
+      font-size: 37px;
       margin-bottom: 10px;
     }
     .title-section p {
       font-family: Arial, sans-serif;
       font-size: 12px;
-      color: #fff;
+      color: #0f3d44;
     }
 
     /* Search bar */
@@ -53,8 +51,6 @@
       display: flex;
       justify-content: center;
       margin-bottom: 20px;
-      position: relative;
-      top: -30px; /* lift it above the colored layer */
     }
     .search-container input {
       width: 40%;
@@ -67,15 +63,15 @@
     /* Coach grid */
     .coach-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 cards per row on desktop */
-      gap: 20px; /* space between cards */
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       padding: 20px;
       flex-grow: 1;
     }
     .coach-card {
       background: #fff;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #0f3d44; /* thin branded border highlight */
       text-align: center;
       padding: 15px;
       cursor: pointer;
@@ -83,7 +79,6 @@
       text-decoration: none;
       color: inherit;
       display: block;
-      border: 1px solid rgba(0,0,0,0.05); /* thin brand touch border */
     }
     .coach-card:hover {
       transform: translateY(-5px);
@@ -109,7 +104,7 @@
     /* Responsive */
     @media (max-width: 768px) {
       .coach-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 per row on mobile */
+        grid-template-columns: repeat(2, 1fr);
       }
       .coach-card img {
         width: 100px;
@@ -176,7 +171,6 @@
     <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
     <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
     <a href="mailto:support@livezy.com">support@livezy.com</a> |
-    <a href="https://wa.me/919663488580" target="_blank">WhatsApp: +91 96634 88580</a>
   </footer>
 
   <!-- Floating WhatsApp -->
