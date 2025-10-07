@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Coach (Test)</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B3MLMR0534"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B3MLMR0534');
+</script>
+<style>
+/* same styling as before */
+body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;}
+.header { display: flex; align-items: center; padding: 10px 20px; background: #fff; border-bottom: 1px solid #ddd;}
+.header img { height: 57px; margin-right: auto;}
+.title-section { text-align: center; margin: 30px 0 20px 0;}
+.title-section h1 { font-family: "PT Sans", sans-serif; font-weight: bold; color: #0f3d44; font-size: 37px; margin-bottom: 10px;}
+.title-section p { font-size: 12px; color: #0f3d44;}
+.search-container { display: flex; justify-content: center; margin-bottom: 15px; gap: 10px;}
+.search-container input, .search-container select { padding: 10px; border: 1px solid #ccc; border-radius: 20px; text-align: center;}
+.coach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; flex-grow: 1;}
+.coach-card { background: #fff; border-radius: 12px; border: 1px solid #0f3d44; text-align: center; padding: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block;}
+.coach-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+.coach-card img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 10px;}
+.coach-card h3 { margin: 5px 0; color: #0f3d44;}
+.coach-card p { margin: 0; color: #007BFF; font-weight: bold;}
+@media (max-width: 768px) {
+    .coach-grid { grid-template-columns: repeat(2, 1fr);}
+    .coach-card img { width: 100px; height: 100px;}
+    .search-container input, .search-container select { width: 45%;}
+}
+footer { background: #fff; border-top: 1px solid #ddd; text-align: center; padding: 15px; font-size: 14px;}
+footer a { margin: 0 10px; text-decoration: none; color: #0f3d44;}
+.whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 50px; height: 50px; cursor: pointer;}
+.whatsapp-float img { width: 100%; height: 100%;}
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
+</div>
+<!-- Title -->
+<div class="title-section">
+    <h1>Choose your coach (Test)</h1>
+    <p>Testing filters with test.json</p>
+</div>
+<!-- Search -->
+<div class="search-container">
+    <input type="text" id="search" placeholder="Search by name or language">
+</div>
+<!-- Filters -->
+<div class="search-container">
+    <select id="genderFilter">
+        <option value="">All Genders</option>
+    </select>
+    <select id="languageFilter">
+        <option value="">All Languages</option>
+    </select>
+</div>
+<!-- Coach Grid -->
+<div class="coach-grid" id="coachGrid"></div>
+<!-- Footer -->
+<footer>
+    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
+    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
+    <a href="mailto:support@livezy.com">support@livezy.com</a>
+</footer>
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/919663488580" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+<script>
+let allCoaches = [];
+
+async function fetchCoaches() {
+  const response = await fetch('test.json?nocache=' + Date.now()); // using test.json
+  const coaches = await response.json();
+  allCoaches = coaches.sort(() => Math.random() - 0.5);
+
+  populateFilters(allCoaches);
+  renderCoaches(allCoaches);
+}
+
+function populateFilters(coaches) {
+  const genders = new Set();
+  const languages = new Set();
+
+  coaches.forEach(c => {
+    if (c.gender) genders.add(c.gender);
+    if (c.languages) c.languages.forEach(l => languages.add(l));
+  });
+
+  const genderSelect = document.getElementById('genderFilter');
+  const languageSelect = document.getElementById('languageFilter');
+
+  genders.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g;
+    genderSelect.appendChild(opt);
+  });
+
+  languages.forEach(l => {
+    const opt = document.createElement('option');
+    opt.value = l;
+    opt.textContent = l;
+    languageSelect.appendChild(opt);
+  });
+}
+
+function renderCoaches(coaches) {
+  const grid = document.getElementById('coachGrid');
+  grid.innerHTML = "";
+  coaches.forEach(coach => {
+    const card = document.createElement('a');
+    card.href = coach.link;
+    card.className = 'coach-card';
+    card.target = "_self";
+    card.innerHTML = `
+      <img src="${coach.image}" alt="${coach.name}">
+      <h3>${coach.name}</h3>
+      <p>View Profile</p>
+    `;
+    card.addEventListener('click', () => {
+      gtag('event', 'coach_click', {
+        'coach_name': coach.name,
+        'coach_link': coach.link
+      });
+    });
+    grid.appendChild(card);
+  });
+}
+
+function applyFilters() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const gender = document.getElementById('genderFilter').value;
+  const language = document.getElementById('languageFilter').value;
+
+  const filtered = allCoaches.filter(coach => {
+    const matchesSearch =
+      coach.name.toLowerCase().includes(search) ||
+      (coach.languages && coach.languages.some(lang => lang.toLowerCase().includes(search)));
+    const matchesGender = gender ? coach.gender === gender : true;
+    const matchesLanguage = language ? (coach.languages && coach.languages.includes(language)) : true;
+
+    return matchesSearch && matchesGender && matchesLanguage;
+  });
+
+  renderCoaches(filtered);
+}
+
+document.getElementById('search').addEventListener('input', applyFilters);
+document.getElementById('genderFilter').addEventListener('change', applyFilters);
+document.getElementById('languageFilter').addEventListener('change', applyFilters);
+
+fetchCoaches();
+</script>
+</body>
+</html>
