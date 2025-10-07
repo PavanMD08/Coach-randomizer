@@ -88,7 +88,7 @@ footer a { margin: 0 10px; text-decoration: none; color: #0f3d44;}
 
 <script>
 let allCoaches = [];
-let activeFilters = { gender: [], languages: [] };
+let activeFilters = { gender: [], language: [] };
 
 async function fetchCoaches() {
   const response = await fetch('test.json?nocache=' + Date.now()); 
@@ -117,7 +117,7 @@ function populateFilters(coaches) {
     genderDiv.innerHTML += `<label><input type="checkbox" value="${g}" onchange="updateFilters('gender')"> ${g}</label>`;
   });
   languages.forEach(l => {
-    langDiv.innerHTML += `<label><input type="checkbox" value="${l}" onchange="updateFilters('languages')"> ${l}</label>`;
+    langDiv.innerHTML += `<label><input type="checkbox" value="${l}" onchange="updateFilters('language')"> ${l}</label>`;
   });
 }
 
@@ -143,13 +143,12 @@ function renderCoaches(coaches) {
 
 function applyFilters() {
   const search = document.getElementById('search').value.toLowerCase();
-  const { gender, languages } = activeFilters;
+  const gender = activeFilters.gender || [];
+  const languages = activeFilters.language || [];
 
   const filtered = allCoaches.filter(coach => {
     const matchesSearch = coach.name.toLowerCase().includes(search);
-
     const matchesGender = gender.length ? gender.includes(coach.gender) : true;
-
     const matchesLanguage = languages.length
       ? (coach.languages && coach.languages.some(l =>
           languages.map(f => f.toLowerCase()).includes(l.toLowerCase())
