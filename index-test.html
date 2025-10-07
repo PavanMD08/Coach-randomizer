@@ -12,6 +12,8 @@
   gtag('js', new Date());
   gtag('config', 'G-B3MLMR0534');
 </script>
+<!-- Google Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 <style>
 body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;}
 .header { display: flex; align-items: center; padding: 10px 20px; background: #fff; border-bottom: 1px solid #ddd;}
@@ -19,13 +21,13 @@ body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; pad
 .title-section { text-align: center; margin: 30px 0 20px 0;}
 .title-section h1 { font-family: "PT Sans", sans-serif; font-weight: bold; color: #0f3d44; font-size: 37px; margin-bottom: 10px;}
 .title-section p { font-size: 12px; color: #0f3d44;}
-/* Search + Filters Row */
-.top-bar { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; margin-bottom: 15px;}
-.top-bar input { padding: 10px; border: 1px solid #ccc; border-radius: 20px; text-align: left; width: 250px;}
+/* Top bar */
+.top-bar { display: flex; align-items: center; gap: 15px; padding: 0 20px; margin-bottom: 15px;}
+.top-bar input { padding: 10px; border: 1px solid #ccc; border-radius: 20px; width: 250px;}
 .filter-toggle { display: flex; align-items: center; cursor: pointer; font-size: 14px; color: #0f3d44; font-weight: bold;}
-.filter-toggle img { width: 18px; height: 18px; margin-left: 5px;}
+.filter-toggle .material-symbols-outlined { font-size: 20px; margin-left: 5px;}
 /* Filter dropdown */
-.filter-dropdown { display: none; position: absolute; top: 120px; right: 20px; background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; width: 220px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100;}
+.filter-dropdown { display: none; position: absolute; top: 120px; left: 20px; background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; width: 220px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100;}
 .filter-dropdown h4 { margin: 10px 0 5px 0; font-size: 14px; color: #0f3d44; border-bottom: 1px solid #eee; padding-bottom: 5px;}
 .filter-dropdown label { display: block; margin: 5px 0; font-size: 13px; color: #333;}
 /* Coach grid */
@@ -62,7 +64,7 @@ footer a { margin: 0 10px; text-decoration: none; color: #0f3d44;}
 <!-- Search + Filters -->
 <div class="top-bar">
     <input type="text" id="search" placeholder="Search">
-    <div class="filter-toggle" onclick="toggleFilters()">Filters <img src="https://cdn-icons-png.flaticon.com/512/54/54712.png" alt="Filter"></div>
+    <div class="filter-toggle" onclick="toggleFilters()">Filters <span class="material-symbols-outlined">tune</span></div>
 </div>
 <!-- Filter dropdown -->
 <div class="filter-dropdown" id="filterDropdown">
@@ -108,17 +110,13 @@ function populateFilters(coaches) {
 
   const genderDiv = document.getElementById('genderOptions');
   const langDiv = document.getElementById('languageOptions');
-
   genderDiv.innerHTML = "";
   langDiv.innerHTML = "";
 
   genders.forEach(g => {
-    const id = "gender-" + g;
     genderDiv.innerHTML += `<label><input type="checkbox" value="${g}" onchange="updateFilters('gender')"> ${g}</label>`;
   });
-
   languages.forEach(l => {
-    const id = "lang-" + l;
     langDiv.innerHTML += `<label><input type="checkbox" value="${l}" onchange="updateFilters('languages')"> ${l}</label>`;
   });
 }
@@ -167,6 +165,16 @@ function toggleFilters() {
   const dropdown = document.getElementById('filterDropdown');
   dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
+
+// close dropdown if clicked outside
+document.addEventListener('click', function(event) {
+  const dropdown = document.getElementById('filterDropdown');
+  const toggle = document.querySelector('.filter-toggle');
+  if (dropdown.style.display === "block" && !dropdown.contains(event.target) && !toggle.contains(event.target)) {
+    dropdown.style.display = "none";
+    applyFilters();
+  }
+});
 
 document.getElementById('search').addEventListener('input', applyFilters);
 
