@@ -147,8 +147,15 @@ function applyFilters() {
 
   const filtered = allCoaches.filter(coach => {
     const matchesSearch = coach.name.toLowerCase().includes(search);
+
     const matchesGender = gender.length ? gender.includes(coach.gender) : true;
-    const matchesLanguage = languages.length ? (coach.languages && coach.languages.some(l => languages.includes(l))) : true;
+
+    const matchesLanguage = languages.length
+      ? (coach.languages && coach.languages.some(l =>
+          languages.map(f => f.toLowerCase()).includes(l.toLowerCase())
+        ))
+      : true;
+
     return matchesSearch && matchesGender && matchesLanguage;
   });
 
