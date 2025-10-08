@@ -7,11 +7,18 @@
     "languages": ["English","Telugu"]
   },
   {
-    "name": "Arun",
-    "image": "https://i.postimg.cc/52zxvbvZ/Arun.jpg",
-    "link": "https://livezy.com/coach-profile/arun.SM",
-     "gender": "Male",
-    "languages": ["English","Tamil","Malayalam"]
+    "name": "Vindya",
+    "image": "https://i.postimg.cc/Z5HFVJPC/Vindya.jpg",
+    "link": "https://livezy.com/coach-profile/vindya.Ch",
+    "gender": "Female",
+    "languages": ["English","Telugu","Kannada","Hindi"]
+  },
+  {
+    "name": "Angeles",
+    "image": "https://i.postimg.cc/BnBNkT39/Angeles-Johnson-1.png",
+    "link": "https://livezy.com/coach-profile/angeles.Johnson",
+     "gender": "Female",
+    "languages": ["English","Tamil","Kannada","Hindi"]
   },
   {
     "name": "Ashrith",
@@ -49,13 +56,6 @@
     "languages": ["English","Telugu","Kannada","Hindi"]
   },
   {
-    "name": "Rohit",
-    "image": "https://i.postimg.cc/SR5h2vKS/Harish-3.jpg",
-    "link": "https://livezy.com/coach-profile/rohit.Sahu",
-     "gender": "Male",
-    "languages": ["English","Hindi"]
-  },
-  {
     "name": "Varsha",
     "image": "https://i.postimg.cc/wj8CCJyG/Varsha.jpg",
     "link": "https://livezy.com/coach-profile/varsha.Srinivasan",
@@ -67,13 +67,6 @@
     "image": "https://i.postimg.cc/mZqfSKbR/Subir.jpg",
     "link": "https://livezy.com/coach-profile/subir.Magnoor",
        "gender": "Male",
-    "languages": ["English","Kannada"]
-  },
-  {
-    "name": "Shashank",
-    "image": "https://i.postimg.cc/Bb8W0BBd/Shashank.jpg",
-    "link": "https://livezy.com/coach-profile/shashank.Gural",
-      "gender": "Male",
     "languages": ["English","Kannada"]
   },
   {
