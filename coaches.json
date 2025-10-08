@@ -4,7 +4,7 @@
     "image": "https://i.postimg.cc/d0mwH656/Aishwarya.jpg",
     "link": "https://livezy.com/coach-profile/aishwarya.Simhalu",
     "gender": "Female",
-    "languages": ["English","Telugu"]
+    "languages": ["English","Telugu","Kannada","Hindi","Tamil"]
   },
   {
     "name": "Vindya",
@@ -15,7 +15,7 @@
   },
   {
     "name": "Angeles",
-    "image": "https://i.postimg.cc/fL8Rrg2S/Angeles.png",
+    "image": "https://i.postimg.cc/90FKKp8p/Angeles.jpg",
     "link": "https://livezy.com/coach-profile/angeles.Johnson",
      "gender": "Female",
     "languages": ["English","Tamil","Kannada","Hindi"]
@@ -123,7 +123,7 @@
     "image": "https://i.postimg.cc/3NzsJ0LW/Vaibhavi.jpg",
     "link": "https://livezy.com/coach-profile/vaibhavi.Joshi",
       "gender": "Female",
-    "languages": ["English","Hindi"]
+    "languages": ["English","Hindi","Assamese"]
   },
   {
     "name": "Samera",
@@ -137,6 +137,6 @@
     "image": "https://i.postimg.cc/L40Rbn3c/Harish-4.jpg",
     "link": "https://livezy.com/coach-profile/piyush.Bajaj",
       "gender": "Male",
-    "languages": ["English","Hindi"]
+    "languages": ["English","Hindi","Punjabi"]
   }
 ]
