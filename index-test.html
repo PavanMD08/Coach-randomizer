@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>💳 Livezy Payments Search</title>
   <style>
     body {
-      font-family: Inter, sans-serif;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: #f7f8fa;
       color: #222;
       margin: 0;
@@ -25,7 +25,7 @@
       width: 90%;
       max-width: 500px;
     }
-    img {
+    img.logo {
       width: 150px;
       margin-bottom: 25px;
       border-radius: 12px;
@@ -49,9 +49,7 @@
       font-weight: 500;
       transition: all 0.2s ease;
     }
-    button:hover {
-      background: #28a95f;
-    }
+    button:hover { background: #28a95f; }
     table {
       margin: 30px auto 0 auto;
       border-collapse: collapse;
@@ -60,37 +58,48 @@
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-    }
-    th {
-      background: #f0f0f0;
-    }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; }
+    th { background: #f0f0f0; }
     #app { display: none; }
-    #status {
-      margin-top: 10px;
-      font-weight: 500;
-    }
+    #status { margin-top: 10px; font-weight: 500; }
   </style>
 </head>
 <body>
+  <!-- LOGIN CARD -->
   <div class="container" id="login">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
+    <img
+      class="logo"
+      src="https://i.postimg.cc/nhyjynqk/Harish-2.png"
+      alt="Livezy Logo"
+      onerror="this.onerror=null; this.src='livezy-logo.png';"
+    />
     <h2>🔒 Livezy Secure Access</h2>
     <p>Please enter password to continue:</p>
-    <input type="password" id="password" placeholder="Enter password"
-           autocomplete="off" autocapitalize="off" spellcheck="false">
-    <br>
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter password"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+      onkeydown="if(event.key==='Enter'){checkPassword();}"
+    />
+    <br/>
     <button onclick="checkPassword()">Login</button>
     <div id="loginStatus" style="margin-top:10px;color:red;"></div>
   </div>
 
+  <!-- APP CARD -->
   <div class="container" id="app">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
+    <img
+      class="logo"
+      src="https://i.postimg.cc/nhyjynqk/Harish-2.png"
+      alt="Livezy Logo"
+      onerror="this.onerror=null; this.src='livezy-logo.png';"
+    />
     <h2>💳 Livezy Payment Checker</h2>
-    <input id="search" placeholder="Enter full email or phone number">
-    <br>
+    <input id="search" placeholder="Enter full email or phone number" />
+    <br/>
     <button onclick="search()">Search</button>
     <div id="status"></div>
     <table id="results"></table>
@@ -98,17 +107,23 @@
 
   <script>
     // ---- CONFIG ----
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQnZHyGDaqk9n18uG2A8ncWcFh1yBucPbBtJEwOZd0WkgF3TMnsZDzAXv0BbIFyhNwQJmTPvqmzWqz/pub?gid=0&single=true&output=csv";
+    const CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQnZHyGDaqk9n18uG2A8ncWcFh1yBucPbBtJEwOZd0WkgF3TMnsZDzAXv0BbIFyhNwQJmTPvqmzWqz/pub?gid=0&single=true&output=csv";
 
-    // Base64 encoded SHA-1 of 'L!vezy2025'
-    const PASSWORD_HASH_BASE64 = "TOt1JOr1qZPMwfXxsJUejRCqGt4=";
+    // ✅ Verified SHA-1 HEX of 'L!vezy2025'
+    const PASSWORD_SHA1_HEX = "4ce9d524ea9f4a993cc1f5f1b0951e8d10aa1ade";
 
     // ---- PASSWORD LOGIC ----
+    async function sha1Hex(str) {
+      const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(str));
+      const bytes = new Uint8Array(buf);
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
     async function checkPassword() {
       const entered = document.getElementById("password").value.trim();
-      const hashBuffer = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(entered));
-      const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
-      if (hashBase64 === PASSWORD_HASH_BASE64) {
+      const hex = await sha1Hex(entered);
+      if (hex === PASSWORD_SHA1_HEX) {
         document.getElementById("login").style.display = "none";
         document.getElementById("app").style.display = "block";
       } else {
@@ -120,14 +135,14 @@
     async function loadCSV() {
       const res = await fetch(CSV_URL);
       const text = await res.text();
-      const rows = text.split('\n').map(r => r.split(','));
-      return rows.slice(1);
+      const rows = text.split("\n").map(r => r.split(","));
+      return rows.slice(1); // skip header
     }
 
     async function search() {
-      const term = document.getElementById('search').value.trim().toLowerCase();
-      const table = document.getElementById('results');
-      const status = document.getElementById('status');
+      const term = document.getElementById("search").value.trim().toLowerCase();
+      const table = document.getElementById("results");
+      const status = document.getElementById("status");
       table.innerHTML = "";
       status.textContent = "⏳ Searching...";
 
@@ -144,8 +159,10 @@
         const email = (r[1] || "").toLowerCase().trim();
         const phone = (r[2] || "").replace(/\D/g, "");
         if (isEmail) {
+          // Exact email match only
           return email === term;
         } else {
+          // Exact phone match on last 10 digits
           const phone10 = phone.slice(-10);
           const term10 = normalizedTerm.slice(-10);
           return phone10 === term10 && phone10.length === 10;
@@ -153,7 +170,8 @@
       });
 
       if (matches.length === 0) {
-        status.textContent = "❌ No payments found. Please enter the full registered email or 10-digit number.";
+        status.textContent =
+          "❌ No payments found. Please enter the full registered email or 10-digit number.";
         return;
       }
 
@@ -161,14 +179,18 @@
 
       table.innerHTML = `
         <tr><th>Email</th><th>Phone</th><th>Amount</th><th>Status</th><th>Date</th></tr>
-        ${matches.map(r => `
+        ${matches
+          .map(
+            r => `
           <tr>
             <td>${r[1] || "—"}</td>
             <td>${r[2] || "—"}</td>
             <td>₹${r[3]}</td>
             <td>${r[4]}</td>
             <td>${r[5]}</td>
-          </tr>`).join("")}
+          </tr>`
+          )
+          .join("")}
       `;
     }
   </script>
