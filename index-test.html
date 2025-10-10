@@ -25,11 +25,6 @@
       width: 90%;
       max-width: 500px;
     }
-    img.logo {
-      width: 150px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-    }
     input, button {
       padding: 10px;
       border: 1px solid #ccc;
@@ -67,12 +62,6 @@
 <body>
   <!-- LOGIN CARD -->
   <div class="container" id="login">
-    <img
-      class="logo"
-      src="https://i.postimg.cc/nhyjynqk/Harish-2.png"
-      alt="Livezy Logo"
-      onerror="this.onerror=null; this.src='livezy-logo.png';"
-    />
     <h2>🔒 Livezy Secure Access</h2>
     <p>Please enter password to continue:</p>
     <input
@@ -91,12 +80,6 @@
 
   <!-- APP CARD -->
   <div class="container" id="app">
-    <img
-      class="logo"
-      src="https://i.postimg.cc/nhyjynqk/Harish-2.png"
-      alt="Livezy Logo"
-      onerror="this.onerror=null; this.src='livezy-logo.png';"
-    />
     <h2>💳 Livezy Payment Checker</h2>
     <input id="search" placeholder="Enter full email or phone number" />
     <br/>
@@ -136,7 +119,7 @@
       const res = await fetch(CSV_URL);
       const text = await res.text();
       const rows = text.split("\n").map(r => r.split(","));
-      return rows.slice(1); // skip header
+      return rows.slice(1);
     }
 
     async function search() {
@@ -159,10 +142,8 @@
         const email = (r[1] || "").toLowerCase().trim();
         const phone = (r[2] || "").replace(/\D/g, "");
         if (isEmail) {
-          // Exact email match only
           return email === term;
         } else {
-          // Exact phone match on last 10 digits
           const phone10 = phone.slice(-10);
           const term10 = normalizedTerm.slice(-10);
           return phone10 === term10 && phone10.length === 10;
