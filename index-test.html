@@ -1,190 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choose Your Coach</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B3MLMR0534"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-B3MLMR0534');
-</script>
-<!-- Google Icons -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-<style>
-body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;}
-.header { display: flex; align-items: center; padding: 10px 20px; background: #fff; border-bottom: 1px solid #ddd;}
-.header img { height: 57px; margin-right: auto;}
-.title-section { text-align: center; margin: 30px 0 20px 0;}
-.title-section h1 { font-family: "PT Sans", sans-serif; font-weight: bold; color: #0f3d44; font-size: 37px; margin-bottom: 10px;}
-.title-section p { font-size: 12px; color: #0f3d44;}
-/* Top bar */
-.top-bar { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px;}
-.top-bar input { padding: 10px; border: 1px solid #ccc; border-radius: 20px; width: 250px;}
-.filter-toggle { display: flex; align-items: center; cursor: pointer; font-size: 14px; color: #0f3d44; font-weight: bold;}
-.filter-toggle .material-symbols-outlined { font-size: 20px; margin-left: 5px;}
-/* Filter dropdown */
-.filter-dropdown { display: none; position: absolute; top: 120px; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; width: 220px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100;}
-.filter-dropdown h4 { margin: 10px 0 5px 0; font-size: 14px; color: #0f3d44; border-bottom: 1px solid #eee; padding-bottom: 5px;}
-.filter-dropdown label { display: block; margin: 5px 0; font-size: 13px; color: #333;}
-/* Coach grid */
-.coach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; flex-grow: 1;}
-.coach-card { background: #fff; border-radius: 12px; border: 1px solid #0f3d44; text-align: center; padding: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block;}
-.coach-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
-.coach-card img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 10px;}
-.coach-card h3 { margin: 5px 0; color: #0f3d44;}
-.coach-card p { margin: 0; color: #007BFF; font-weight: bold;}
-/* Responsive */
-@media (max-width: 768px) {
-    .coach-grid { grid-template-columns: repeat(2, 1fr);}
-    .coach-card img { width: 100px; height: 100px;}
-    .top-bar { flex-direction: column; gap: 10px;}
-}
-/* Footer */
-footer { background: #fff; border-top: 1px solid #ddd; text-align: center; padding: 15px; font-size: 14px;}
-footer a { margin: 0 10px; text-decoration: none; color: #0f3d44;}
-/* WhatsApp */
-.whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 50px; height: 50px; cursor: pointer;}
-.whatsapp-float img { width: 100%; height: 100%;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💳 Livezy Payments Search</title>
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      width: 90%;
+      max-width: 500px;
+    }
+    img {
+      width: 150px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+    }
+    input, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input {
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      margin-top: 10px;
+      background: #30C16E;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      background: #28a95f;
+    }
+    table {
+      margin: 30px auto 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    #app { display: none; }
+    #status {
+      margin-top: 10px;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-<!-- Header -->
-<div class="header">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
-</div>
-<!-- Title -->
-<div class="title-section">
-    <h1>Choose your coach</h1>
-    <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
-</div>
-<!-- Search + Filters -->
-<div class="top-bar">
-    <input type="text" id="search" placeholder="Search">
-    <div class="filter-toggle" onclick="toggleFilters()">Filters <span class="material-symbols-outlined">tune</span></div>
-</div>
-<!-- Filter dropdown -->
-<div class="filter-dropdown" id="filterDropdown">
-    <h4>Gender</h4>
-    <div id="genderOptions"></div>
-    <h4>Languages</h4>
-    <div id="languageOptions"></div>
-</div>
-<!-- Coach Grid -->
-<div class="coach-grid" id="coachGrid"></div>
-<!-- Footer -->
-<footer>
-    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
-    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
-    <a href="mailto:support@livezy.com">support@livezy.com</a>
-</footer>
-<!-- WhatsApp -->
-<a href="https://wa.me/919663488580" target="_blank" class="whatsapp-float">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-</a>
+  <div class="container" id="login">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
+    <h2>🔒 Livezy Secure Access</h2>
+    <p>Please enter password to continue:</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Login</button>
+    <div id="loginStatus" style="margin-top:10px;color:red;"></div>
+  </div>
 
-<script>
-let allCoaches = [];
-let activeFilters = { gender: [], language: [] };
+  <div class="container" id="app">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
+    <h2>💳 Livezy Payment Checker</h2>
+    <input id="search" placeholder="Enter full email or phone number">
+    <br>
+    <button onclick="search()">Search</button>
+    <div id="status"></div>
+    <table id="results"></table>
+  </div>
 
-async function fetchCoaches() {
-  const response = await fetch('test.json?nocache=' + Date.now()); 
-  const coaches = await response.json();
-  allCoaches = coaches.sort(() => Math.random() - 0.5);
+  <script>
+    // ---- CONFIG ----
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQnZHyGDaqk9n18uG2A8ncWcFh1yBucPbBtJEwOZd0WkgF3TMnsZDzAXv0BbIFyhNwQJmTPvqmzWqz/pub?gid=0&single=true&output=csv";
+    const PASSWORD_HASH = "a558422f9c9ff1e35b3776f4314d6c993f7b742c"; // hash for L!vezy2025
 
-  populateFilters(allCoaches);
-  renderCoaches(allCoaches);
-}
+    // ---- PASSWORD LOGIC ----
+    async function checkPassword() {
+      const entered = document.getElementById("password").value;
+      const hash = await sha1(entered);
+      if (hash === PASSWORD_HASH) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("app").style.display = "block";
+      } else {
+        document.getElementById("loginStatus").textContent = "❌ Incorrect password";
+      }
+    }
 
-function populateFilters(coaches) {
-  const genders = new Set();
-  const languages = new Set();
+    async function sha1(str) {
+      const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(str));
+      return Array.prototype.map.call(new Uint8Array(buf), x => ('00'+x.toString(16)).slice(-2)).join('');
+    }
 
-  coaches.forEach(c => {
-    if (c.gender) genders.add(c.gender);
-    if (c.languages) c.languages.forEach(l => languages.add(l));
-  });
+    // ---- SEARCH LOGIC ----
+    async function loadCSV() {
+      const res = await fetch(CSV_URL);
+      const text = await res.text();
+      const rows = text.split('\n').map(r => r.split(','));
+      return rows.slice(1);
+    }
 
-  const genderDiv = document.getElementById('genderOptions');
-  const langDiv = document.getElementById('languageOptions');
-  genderDiv.innerHTML = "";
-  langDiv.innerHTML = "";
+    async function search() {
+      const term = document.getElementById('search').value.trim().toLowerCase();
+      const table = document.getElementById('results');
+      const status = document.getElementById('status');
+      table.innerHTML = "";
+      status.textContent = "⏳ Searching...";
 
-  genders.forEach(g => {
-    genderDiv.innerHTML += `<label><input type="checkbox" value="${g}" onchange="updateFilters('gender')"> ${g}</label>`;
-  });
-  languages.forEach(l => {
-    langDiv.innerHTML += `<label><input type="checkbox" value="${l}" onchange="updateFilters('language')"> ${l}</label>`;
-  });
-}
+      if (!term) {
+        status.textContent = "⚠️ Please enter an email or phone number.";
+        return;
+      }
 
-function renderCoaches(coaches) {
-  const grid = document.getElementById('coachGrid');
-  grid.innerHTML = "";
-  coaches.forEach(coach => {
-    const card = document.createElement('a');
-    card.href = coach.link;
-    card.className = 'coach-card';
-    card.target = "_self";
-    card.innerHTML = `
-      <img src="${coach.image}" alt="${coach.name}">
-      <h3>${coach.name}</h3>
-      <p>View Profile</p>
-    `;
-    card.addEventListener('click', () => {
-      gtag('event', 'coach_click', { 'coach_name': coach.name, 'coach_link': coach.link });
-    });
-    grid.appendChild(card);
-  });
-}
+      const data = await loadCSV();
+      const isEmail = term.includes("@");
+      const normalizedTerm = term.replace(/\D/g, "");
 
-function applyFilters() {
-  const search = document.getElementById('search').value.toLowerCase();
-  const gender = activeFilters.gender || [];
-  const languages = activeFilters.language || [];
+      const matches = data.filter(r => {
+        const email = (r[1] || "").toLowerCase().trim();
+        const phone = (r[2] || "").replace(/\D/g, "");
+        if (isEmail) {
+          return email === term; // exact email
+        } else {
+          const phone10 = phone.slice(-10);
+          const term10 = normalizedTerm.slice(-10);
+          return phone10 === term10 && phone10.length === 10; // exact phone
+        }
+      });
 
-  const filtered = allCoaches.filter(coach => {
-    const matchesSearch = coach.name.toLowerCase().includes(search);
-    const matchesGender = gender.length ? gender.includes(coach.gender) : true;
-    const matchesLanguage = languages.length
-      ? (coach.languages && coach.languages.some(l =>
-          languages.map(f => f.toLowerCase()).includes(l.toLowerCase())
-        ))
-      : true;
+      if (matches.length === 0) {
+        status.textContent = "❌ No payments found. Please enter the full registered email or 10-digit number.";
+        return;
+      }
 
-    return matchesSearch && matchesGender && matchesLanguage;
-  });
+      status.textContent = `✅ ${matches.length} payment(s) found`;
 
-  renderCoaches(filtered);
-}
-
-function updateFilters(type) {
-  const checkboxes = document.querySelectorAll(`#${type}Options input[type=checkbox]`);
-  activeFilters[type] = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-  applyFilters();
-}
-
-function toggleFilters() {
-  const dropdown = document.getElementById('filterDropdown');
-  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-}
-
-// close dropdown if clicked outside
-document.addEventListener('click', function(event) {
-  const dropdown = document.getElementById('filterDropdown');
-  const toggle = document.querySelector('.filter-toggle');
-  if (dropdown.style.display === "block" && !dropdown.contains(event.target) && !toggle.contains(event.target)) {
-    dropdown.style.display = "none";
-    applyFilters();
-  }
-});
-
-document.getElementById('search').addEventListener('input', applyFilters);
-
-fetchCoaches();
-</script>
+      table.innerHTML = `
+        <tr><th>Email</th><th>Phone</th><th>Amount</th><th>Status</th><th>Date</th></tr>
+        ${matches.map(r => `
+          <tr>
+            <td>${r[1] || "—"}</td>
+            <td>${r[2] || "—"}</td>
+            <td>₹${r[3]}</td>
+            <td>${r[4]}</td>
+            <td>${r[5]}</td>
+          </tr>`).join("")}
+      `;
+    }
+  </script>
 </body>
 </html>
