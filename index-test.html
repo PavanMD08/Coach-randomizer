@@ -76,7 +76,7 @@
 </head>
 <body>
   <div class="container" id="login">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo" onerror="this.src='https://i.postimg.cc/nhyjynqk/Harish-2.png'">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
     <h2>🔒 Livezy Secure Access</h2>
     <p>Please enter password to continue:</p>
     <input type="password" id="password" placeholder="Enter password"
@@ -87,7 +87,7 @@
   </div>
 
   <div class="container" id="app">
-    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo" onerror="this.src='https://i.postimg.cc/nhyjynqk/Harish-2.png'">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Livezy Logo">
     <h2>💳 Livezy Payment Checker</h2>
     <input id="search" placeholder="Enter full email or phone number">
     <br>
@@ -99,23 +99,21 @@
   <script>
     // ---- CONFIG ----
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQnZHyGDaqk9n18uG2A8ncWcFh1yBucPbBtJEwOZd0WkgF3TMnsZDzAXv0BbIFyhNwQJmTPvqmzWqz/pub?gid=0&single=true&output=csv";
-    const PASSWORD_HASH = "4ce9d524ea9f4a993cc1f5f1b0951e8d10aa1ade"; // Correct SHA1 hash for L!vezy2025
+
+    // Base64 encoded SHA-1 of 'L!vezy2025'
+    const PASSWORD_HASH_BASE64 = "TOt1JOr1qZPMwfXxsJUejRCqGt4=";
 
     // ---- PASSWORD LOGIC ----
     async function checkPassword() {
       const entered = document.getElementById("password").value.trim();
-      const hash = await sha1(entered);
-      if (hash === PASSWORD_HASH) {
+      const hashBuffer = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(entered));
+      const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
+      if (hashBase64 === PASSWORD_HASH_BASE64) {
         document.getElementById("login").style.display = "none";
         document.getElementById("app").style.display = "block";
       } else {
         document.getElementById("loginStatus").textContent = "❌ Incorrect password";
       }
-    }
-
-    async function sha1(str) {
-      const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(str));
-      return Array.prototype.map.call(new Uint8Array(buf), x => ('00'+x.toString(16)).slice(-2)).join('');
     }
 
     // ---- SEARCH LOGIC ----
@@ -146,11 +144,11 @@
         const email = (r[1] || "").toLowerCase().trim();
         const phone = (r[2] || "").replace(/\D/g, "");
         if (isEmail) {
-          return email === term; // exact email
+          return email === term;
         } else {
           const phone10 = phone.slice(-10);
           const term10 = normalizedTerm.slice(-10);
-          return phone10 === term10 && phone10.length === 10; // exact phone
+          return phone10 === term10 && phone10.length === 10;
         }
       });
 
