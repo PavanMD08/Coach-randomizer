@@ -42,13 +42,6 @@
     "languages": ["English","Tamil","Kannada"]
   },
   {
-    "name": "Geo",
-    "image": "https://i.postimg.cc/hGqK161h/Geo.jpg",
-    "link": "https://livezy.com/coach-profile/geo.Thomas",
-     "gender": "Male",
-    "languages": ["English","Malayalam"]
-  },
-  {
     "name": "Giko",
     "image": "https://i.postimg.cc/xC6YYCDb/Giko.jpg",
     "link": "https://livezy.com/coach-profile/giko.Mathew",
@@ -76,13 +69,6 @@
       "gender": "Female",
     "languages": ["English","Kannada","Tamil"]
   },
-   {
-    "name": "Subir",
-    "image": "https://i.postimg.cc/mZqfSKbR/Subir.jpg",
-    "link": "https://livezy.com/coach-profile/subir.Magnoor",
-       "gender": "Male",
-    "languages": ["English","Kannada"]
-  },
   {
     "name": "Sanju",
     "image": "https://i.postimg.cc/d1NMpxr2/Sanju.jpg",
@@ -91,25 +77,11 @@
     "languages": ["English","Malayalam"]
   },
   {
-    "name": "Vishal",
-    "image": "https://i.postimg.cc/43wjHS8D/Vishal.jpg",
-    "link": "https://livezy.com/coach-profile/vishal.Singh",
-      "gender": "Male",
-    "languages": ["English","Hindi"]
-  },
-  {
     "name": "Suvendu",
     "image": "https://i.postimg.cc/tJ7bgjpv/Harish-2.jpg",
     "link": "https://livezy.com/coach-profile/suvendu.Ghosh",
       "gender": "Male",
     "languages": ["English","Hindi","Bengali"]
-  },
-  {
-    "name": "Prerna",
-    "image": "https://i.postimg.cc/FH04zGXv/Prerna.jpg",
-    "link": "https://livezy.com/coach-profile/prerna.Sethia",
-      "gender": "Female",
-    "languages": ["English","Hindi"]
   },
   {
     "name": "Swaathish",
