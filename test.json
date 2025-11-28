@@ -1,5 +1,17 @@
 [
   {
+    "name": "Ashwini",
+    "image": "https://i.postimg.cc/HxbWqkKF/Ashwini.png",
+    "link": "https://livezy.com/coach-profile/ashwini.Mogera",
+    "gender": "Female",
+    "languages": ["English","kannada"]
+  },{
+    "name": "Rohit",
+    "image": "https://i.postimg.cc/7Pg063nH/Harish-3.jpg",
+    "link": "https://livezy.com/coach-profile/rohit.Sahu",
+    "gender": "Male",
+    "languages": ["English","Bengali","Assamese","Hindi","Punjabi"]
+  },{
     "name": "Varsha",
     "image": "https://i.postimg.cc/wj8CCJyG/Varsha.jpg",
     "link": "https://livezy.com/coach-profile/varsha.Srinivasan",
