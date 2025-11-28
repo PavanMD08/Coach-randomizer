@@ -56,13 +56,6 @@
     "languages": ["English","Telugu","Kannada","Hindi"]
   },
   {
-    "name": "Karthik",
-    "image": "https://i.postimg.cc/Kv6bmwVQ/Karthik.jpg",
-    "link": "https://livezy.com/coach-profile/karthik.Vaibhav",
-     "gender": "Male",
-    "languages": ["English","Telugu","Kannada","Hindi"]
-  },
-  {
     "name": "Varsha",
     "image": "https://i.postimg.cc/wj8CCJyG/Varsha.jpg",
     "link": "https://livezy.com/coach-profile/varsha.Srinivasan",
@@ -110,13 +103,6 @@
     "link": "https://livezy.com/coach-profile/vaibhavi.Joshi",
       "gender": "Female",
     "languages": ["English","Hindi"]
-  },
-  {
-    "name": "Samera",
-    "image": "https://i.postimg.cc/jjXYQ5jk/Sameera.jpg",
-    "link": "https://livezy.com/coach-profile/samera.Kumar",
-      "gender": "Female",
-    "languages": ["English"]
   },
   {
     "name": "Piyush",
