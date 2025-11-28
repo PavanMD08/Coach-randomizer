@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Coach (Test)</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B3MLMR0534"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B3MLMR0534');
+</script>
+<!-- Google Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<style>
+body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;}
+.header { display: flex; align-items: center; padding: 10px 20px; background: #fff; border-bottom: 1px solid #ddd;}
+.header img { height: 57px; margin-right: auto;}
+.title-section { text-align: center; margin: 30px 0 20px 0;}
+.title-section h1 { font-family: "PT Sans", sans-serif; font-weight: bold; color: #0f3d44; font-size: 37px; margin-bottom: 10px;}
+.title-section p { font-size: 12px; color: #0f3d44;}
+/* Top bar */
+.top-bar { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px;}
+.top-bar input { padding: 10px; border: 1px solid #ccc; border-radius: 20px; width: 250px;}
+.filter-toggle { display: flex; align-items: center; cursor: pointer; font-size: 14px; color: #0f3d44; font-weight: bold;}
+.filter-toggle .material-symbols-outlined { font-size: 20px; margin-left: 5px;}
+/* Filter dropdown */
+.filter-dropdown { display: none; position: absolute; top: 120px; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; width: 220px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100;}
+.filter-dropdown h4 { margin: 10px 0 5px 0; font-size: 14px; color: #0f3d44; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+.filter-dropdown label { display: block; margin: 5px 0; font-size: 13px; color: #333;}
+/* Coach grid */
+.coach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; flex-grow: 1;}
+.coach-card { background: #fff; border-radius: 12px; border: 1px solid #0f3d44; text-align: center; padding: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block;}
+.coach-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+.coach-card img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 10px;}
+.coach-card h3 { margin: 5px 0; color: #0f3d44;}
+.coach-card p { margin: 0; color: #007BFF; font-weight: bold;}
+/* Responsive */
+@media (max-width: 768px) {
+    .coach-grid { grid-template-columns: repeat(2, 1fr);}
+    .coach-card img { width: 100px; height: 100px;}
+    .top-bar { flex-direction: column; gap: 10px;}
+}
+/* Footer */
+footer { background: #fff; border-top: 1px solid #ddd; text-align: center; padding: 15px; font-size: 14px;}
+footer a { margin: 0 10px; text-decoration: none; color: #0f3d44;}
+/* WhatsApp */
+.whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 50px; height: 50px; cursor: pointer;}
+.whatsapp-float img { width: 100%; height: 100%;}
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <img src="https://i.postimg.cc/nhyjynqk/Harish-2.png" alt="Logo">
+</div>
+<!-- Title -->
+<div class="title-section">
+    <h1>Choose your coach (Test)</h1>
+    <p>Transformed 50,000+ people. Choose from our expert coaches and start your fitness journey today!</p>
+</div>
+<!-- Search + Filters -->
+<div class="top-bar">
+    <input type="text" id="search" placeholder="Search">
+    <div class="filter-toggle" onclick="toggleFilters()">Filters <span class="material-symbols-outlined">tune</span></div>
+</div>
+<!-- Filter dropdown -->
+<div class="filter-dropdown" id="filterDropdown">
+    <h4>Gender</h4>
+    <div id="genderOptions"></div>
+    <h4>Languages</h4>
+    <div id="languageOptions"></div>
+</div>
+<!-- Coach Grid -->
+<div class="coach-grid" id="coachGrid"></div>
+<!-- Footer -->
+<footer>
+    <a href="https://livezy.com/terms-conditions" target="_blank">T&amp;C's</a> |
+    <a href="https://livezy.com/privacy-policy" target="_blank">Privacy Policy</a> |
+    <a href="mailto:support@livezy.com">support@livezy.com</a>
+</footer>
+<!-- WhatsApp -->
+<a href="https://wa.me/919663488580" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+<script>
+let allCoaches = [];
+let activeFilters = { gender: [], language: [] };
+
+async function fetchCoaches() {
+  // 🔁 MAIN CHANGE: using test.json instead of coaches.json
+  const response = await fetch('test.json?nocache=' + Date.now());
+  const coaches = await response.json();
+  allCoaches = coaches.sort(() => Math.random() - 0.5);
+
+  populateFilters(allCoaches);
+  renderCoaches(allCoaches);
+}
+
+function populateFilters(coaches) {
+  const genders = new Set();
+  const languages = new Set();
+
+  coaches.forEach(c => {
+    if (c.gender) genders.add(c.gender);
+    if (c.languages) c.languages.forEach(l => languages.add(l));
+  });
+
+  const genderDiv = document.getElementById('genderOptions');
+  const langDiv = document.getElementById('languageOptions');
+  genderDiv.innerHTML = "";
+  langDiv.innerHTML = "";
+
+  genders.forEach(g => {
+    genderDiv.innerHTML += `<label><input type="checkbox" value="${g}" onchange="updateFilters('gender')"> ${g}</label>`;
+  });
+  languages.forEach(l => {
+    langDiv.innerHTML += `<label><input type="checkbox" value="${l}" onchange="updateFilters('language')"> ${l}</label>`;
+  });
+}
+
+function renderCoaches(coaches) {
+  const grid = document.getElementById('coachGrid');
+  grid.innerHTML = "";
+  coaches.forEach(coach => {
+    const card = document.createElement('a');
+    card.href = coach.link;
+    card.className = 'coach-card';
+    card.target = "_self";
+    card.innerHTML = `
+      <img src="${coach.image}" alt="${coach.name}">
+      <h3>${coach.name}</h3>
+      <p>View Profile</p>
+    `;
+    card.addEventListener('click', () => {
+      gtag('event', 'coach_click', { 'coach_name': coach.name, 'coach_link': coach.link });
+    });
+    grid.appendChild(card);
+  });
+}
+
+function applyFilters() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const gender = activeFilters.gender || [];
+  const languages = activeFilters.language || [];
+
+  const filtered = allCoaches.filter(coach => {
+    const matchesSearch = coach.name.toLowerCase().includes(search);
+    const matchesGender = gender.length ? gender.includes(coach.gender) : true;
+    const matchesLanguage = languages.length
+      ? (coach.languages && coach.languages.some(l =>
+          languages.map(f => f.toLowerCase()).includes(l.toLowerCase())
+        ))
+      : true;
+
+    return matchesSearch && matchesGender && matchesLanguage;
+  });
+
+  renderCoaches(filtered);
+}
+
+function updateFilters(type) {
+  const checkboxes = document.querySelectorAll(`#${type}Options input[type=checkbox]`);
+  activeFilters[type] = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+  applyFilters();
+}
+
+function toggleFilters() {
+  const dropdown = document.getElementById('filterDropdown');
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+// close dropdown if clicked outside
+document.addEventListener('click', function(event) {
+  const dropdown = document.getElementById('filterDropdown');
+  const toggle = document.querySelector('.filter-toggle');
+  if (dropdown.style.display === "block" && !dropdown.contains(event.target) && !toggle.contains(event.target)) {
+    dropdown.style.display = "none";
+    applyFilters();
+  }
+});
+
+document.getElementById('search').addEventListener('input', applyFilters);
+
+fetchCoaches();
+</script>
+</body>
+</html>
